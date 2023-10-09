@@ -1,13 +1,16 @@
 import smtplib
 from email.mime.text import MIMEText
 
+with open('password.txt', 'r', encoding='utf-8') as file:
+    password = file.read()
+
 def email(text, subject, receivers=None, ):
     if receivers is None:
         receivers = ['2574292235@qq.com']
 
     mail_host = 'smtp.qq.com'
     mail_user = '2574292235'
-    mail_pass = 'pycsgaebdiwjdhjb'
+    mail_pass = password
     sender = '2574292235@qq.com'
 
     message = MIMEText(text, 'plain', 'utf-8')
