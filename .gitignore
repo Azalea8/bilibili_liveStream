@@ -107,6 +107,6 @@ venv.bak/
 .idea/
 
 # mine
-cookie.txt
-book.txt
-password.txt
+txt/cookie.txt
+txt/book.txt
+txt/password.txt

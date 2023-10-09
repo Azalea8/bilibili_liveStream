@@ -1,7 +1,7 @@
 import smtplib
 from email.mime.text import MIMEText
 
-with open('password.txt', 'r', encoding='utf-8') as file:
+with open('txt/password.txt', 'r', encoding='utf-8') as file:
     password = file.read()
 
 def email(text, subject, receivers=None, ):

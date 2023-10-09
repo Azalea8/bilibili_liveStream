@@ -1,7 +1,7 @@
 import time
 
-from email_mine import email
-from requests_mine import send, isStart
+from mine.email_mine import email
+from mine.requests_mine import send, isStart
 
 while 1:
     flag = isStart()
@@ -12,7 +12,7 @@ while 1:
         print('炫神未开播')
         time.sleep(600)
 
-with open('book.txt', 'r', encoding='utf-8') as file:
+with open('txt/book.txt', 'r', encoding='utf-8') as file:
     content = file.read()
 
 content = content.replace('\t', '')  # 去除制表符

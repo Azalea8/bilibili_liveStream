@@ -1,9 +1,9 @@
 import requests
 import json
 
-from email_mine import email
+from mine.email_mine import email
 
-with open('cookie.txt', 'r', encoding='utf-8') as file:
+with open('txt/cookie.txt', 'r', encoding='utf-8') as file:
     tmp = file.read()
 
 def isStart():

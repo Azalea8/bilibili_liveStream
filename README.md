@@ -5,8 +5,8 @@ B站直播间说书人脚本，脚本挂载后可实现开播，脚本自动执�
 
 send函数里的data字典，需要在直播间手动发送一条弹幕，F12检查
 
-<img alt="img.png" height="300" src="img.png" />
+<img alt="img.png" height="300" src="img/img.png" />
 
 cookie是在Headers里最长的那个，注意：cookie保存了个人信息，不要随便泄露
 
-<img alt="img_1.png" height="200" src="img_1.png" />
+<img alt="img_1.png" height="200" src="img/img_1.png" />
