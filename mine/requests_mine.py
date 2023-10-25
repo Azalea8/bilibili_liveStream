@@ -6,22 +6,17 @@ from mine.email_mine import email
 with open('txt/cookie.txt', 'r', encoding='utf-8') as file:
     tmp = file.read()
 
+# 直播间房间号，可以用短号，如该直播间短号为 84074
+room_id = 14709735
 def isStart():
-    flag = 0
-    url = 'https://api.vc.bilibili.com/dynamic_svr/v1/dynamic_svr/w_live_users?size=10'
+    url = f'https://api.live.bilibili.com/room/v1/Room/get_info?room_id={room_id}'
     headers = {
-        'cookie': tmp,
         'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36 Edg/117.0.2045.55',
     }
     response = requests.get(url=url, headers=headers)
     ans = json.loads(response.text)
-    try:
-        list = ans['data']['items']
-        for b in list:
-            if b['uid'] == 299013902:
-                flag = 1
-    except:
-        flag = 0
+    # print(ans)
+    flag = ans['data']['live_status']
     return flag
 
 def send(msg):

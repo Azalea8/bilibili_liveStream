@@ -24,7 +24,7 @@ chunks = [content[i:i + 20] for i in range(0, len(content), 20)]
 count = 1
 for chunk in chunks:
     send(chunk)
-    print(str(count) + '  ||  ' + chunk)
+    # print(str(count) + '  ||  ' + chunk)
     count += 1
     if count % 100 == 0:
         flag = isStart()
