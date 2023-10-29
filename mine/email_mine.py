@@ -22,9 +22,10 @@ def email(text, subject, receivers=None, ):
     message['To'] = receivers[0]
 
     try:
-        smtpObj = smtplib.SMTP()
+        # 部署到阿里云服务器上时发现程序发送smtp邮件必须通过SSL协议端口发送
+        smtpObj = smtplib.SMTP_SSL(mail_host)
         # 连接到服务器
-        smtpObj.connect(mail_host, 25)
+        smtpObj.connect(mail_host, 465)
         # 登录到服务器
         smtpObj.login(mail_user, mail_pass)
         # 发送
