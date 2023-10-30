@@ -1,7 +1,7 @@
 import time
 
 from mine.email_mine import email
-from mine.requests_mine import send, isStart
+from mine.requests_mine import send, isStart, qqbot_send
 
 with open('txt/book.txt', 'r', encoding='utf-8') as file:
     content = file.read()
@@ -10,7 +10,8 @@ while 1:
     while 1:
         flag = isStart()
         if flag == 1:
-            email(text='检测到炫神开播了，说书人脚本启动', subject='说书人脚本')
+            email(text='检测到炫神开播，说书人脚本启动', subject='说书人脚本')
+            # qqbot_send('检测到炫神开播，说书人脚本启动')
             break
         else:
             # print('炫神未开播')
@@ -32,6 +33,7 @@ while 1:
             flag = isStart()
             if flag == 0:
                 email(text='检测到炫神下播，说书人脚本终止', subject='说书人脚本')
+                # qqbot_send('检测到炫神下播，说书人脚本终止')
                 break
             else:
                 num += 100
