@@ -5,6 +5,13 @@ from mine.requests_mine import send, isStart, qqbot_send
 
 with open('txt/book.txt', 'r', encoding='utf-8') as file:
     content = file.read()
+file.close()
+
+content = content.replace('\t', '')  # 去除制表符
+content = content.replace('\n', '')
+content = content.replace(' ', '')
+
+chunks = [content[i:i + 20] for i in range(0, len(content), 20)]
 
 while 1:
     while 1:
@@ -16,12 +23,6 @@ while 1:
         else:
             # print('炫神未开播')
             time.sleep(600)
-
-    content = content.replace('\t', '')  # 去除制表符
-    content = content.replace('\n', '')
-    content = content.replace(' ', '')
-
-    chunks = [content[i:i + 20] for i in range(0, len(content), 20)]
 
     count = 0
     for chunk in chunks:

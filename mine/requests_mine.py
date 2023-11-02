@@ -26,7 +26,6 @@ def qqbot_send(msg):
     }
     requests.get(url='http://127.0.0.1:5700/send_private_msg', params=params)
 
-
 def send(msg):
     global response
     url = 'https://api.live.bilibili.com/msg/send'
