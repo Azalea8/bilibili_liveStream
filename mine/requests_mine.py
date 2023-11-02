@@ -59,4 +59,5 @@ def send(msg):
         response = requests.post(url=url, data=data, headers=headers)
     except:
         email(text='说书人脚本异常 || 状态码：' + str(response.status_code), subject='说书人脚本')
+        # qqbot_send(msg='说书人脚本异常 || 状态码：' + str(response.status_code))
 
