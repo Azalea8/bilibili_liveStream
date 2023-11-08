@@ -1,4 +1,6 @@
 # bilibili_liveStream
+
+一次测试
 B站直播间说书人脚本，脚本挂载后可实现开播，脚本自动执行并发送邮件通知，下播后自动终止发送邮件通知
 
 执行 pip install requests 安装唯一的第三方库
