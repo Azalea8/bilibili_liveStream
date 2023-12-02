@@ -18,7 +18,7 @@ while 1:
         flag = isStart()
         if flag == 1:
             email(text='检测到炫神开播，说书人脚本启动', subject='说书人脚本')
-            # qqbot_send('检测到炫神开播，说书人脚本启动')
+            qqbot_send('检测到炫神开播，说书人脚本启动')
             break
         else:
             # print('炫神未开播')
@@ -26,17 +26,21 @@ while 1:
 
     count = 0
     for chunk in chunks:
-        send(chunk)
+        flag = send(chunk)
         # print(str(count) + '  ||  ' + chunk)
         count += 1
         if count % 100 == 0:
             flag = isStart()
             if flag == 0:
                 email(text=f'检测到炫神下播，说书人脚本终止，共发送弹幕{count}条', subject='说书人脚本')
-                # qqbot_send(f'检测到炫神下播，说书人脚本终止，共发送弹幕{count}条')
+                qqbot_send(f'检测到炫神下播，说书人脚本终止，共发送弹幕{count}条')
                 break
             else:
                 print(f'{count}条弹幕在播检测通过，脚本继续')
+        if flag == 0:
+            break;
         time.sleep(5)
-
-    time.sleep(36000)
+    
+    if flag == 0:
+        break;
+        

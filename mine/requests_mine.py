@@ -36,19 +36,19 @@ def send(msg):
         'color': '16777215',
         'mode': '1',
         'room_type': '0',
-        'jumpfrom': '86002',
+        'jumpfrom': '84002',
         'reply_mid': '0',
         'fontsize': '25',
-        'rnd': '1696580396',
+        'rnd': '1700921525',
         'roomid': '14709735',
-        'csrf': '2fa14b2152cc47312d90966f7c90b34f',
-        'csrf_token': '2fa14b2152cc47312d90966f7c90b34f',
+        'csrf': '1c7217af697b69593b49b760e7464413',
+        'csrf_token': '1c7217af697b69593b49b760e7464413',
     }
 
     headers = {
         'cookie': tmp,
-        'origin': 'https://live.bilibili.com',
-        'referer': 'https://live.bilibili.com/84074?broadcast_type=0&is_room_feed=1&spm_id_from=333.999.to_liveroom.0.click&live_from=86002',
+        # 'origin': 'https://live.bilibili.com',
+        # 'referer': 'https://live.bilibili.com/84074?live_from=84002&spm_id_from=333.337.0.0',
         'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36 Edg/117.0.2045.55',
     }
 
@@ -56,7 +56,16 @@ def send(msg):
 
     try:
         response = requests.post(url=url, data=data, headers=headers)
+        message = json.loads(response.text)
+        print(message)
+        print('\n')
+        if message['code'] != 0:
+            email(text='说书人脚本异常终止: \n' + str(message), subject='说书人脚本')
+            qqbot_send(msg='说书人脚本异常终止: \n' + str(message))
+            return 0
     except:
         email(text='说书人脚本异常 || 状态码：' + str(response.status_code), subject='说书人脚本')
-        # qqbot_send(msg='说书人脚本异常 || 状态码：' + str(response.status_code))
+        qqbot_send(msg='说书人脚本异常 || 状态码：' + str(response.status_code))
+    
+    return 1
 
