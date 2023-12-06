@@ -8,6 +8,8 @@ with open('txt/cookie.txt', 'r', encoding='utf-8') as file:
 
 # 直播间房间号，可以用短号，如该直播间短号为 84074
 room_id = 14709735
+
+
 def isStart():
     url = f'https://api.live.bilibili.com/room/v1/Room/get_info?room_id={room_id}'
     headers = {
@@ -19,12 +21,14 @@ def isStart():
     flag = ans['data']['live_status']
     return flag
 
+
 def qqbot_send(msg):
     params = {
         'user_id': 2574292235,
         'message': msg,
     }
     requests.get(url='http://127.0.0.1:5700/send_private_msg', params=params)
+
 
 def send(msg):
     global response
@@ -41,8 +45,8 @@ def send(msg):
         'fontsize': '25',
         'rnd': '1700921525',
         'roomid': '14709735',
-        'csrf': '1c7217af697b69593b49b760e7464413',
-        'csrf_token': '1c7217af697b69593b49b760e7464413',
+        'csrf': '44fa6c87946e48d376c290656c92d788',
+        'csrf_token': '44fa6c87946e48d376c290656c92d788',
     }
 
     headers = {
@@ -54,18 +58,14 @@ def send(msg):
 
     data['msg'] = msg
 
-    try:
-        response = requests.post(url=url, data=data, headers=headers)
-        message = json.loads(response.text)
-        print(message)
-        print('\n')
-        if message['code'] != 0:
-            email(text='说书人脚本异常终止: \n' + str(message), subject='说书人脚本')
-            qqbot_send(msg='说书人脚本异常终止: \n' + str(message))
-            return 0
-    except:
-        email(text='说书人脚本异常 || 状态码：' + str(response.status_code), subject='说书人脚本')
-        qqbot_send(msg='说书人脚本异常 || 状态码：' + str(response.status_code))
-    
-    return 1
+    response = requests.post(url=url, data=data, headers=headers)
+    message = json.loads(response.text)
+    print(message)
+    print('\n')
+    if message['code'] < 0:
+        email(text='说书人脚本异常终止: \n' + str(message), subject='说书人脚本')
+        qqbot_send(msg='说书人脚本异常终止: \n' + str(message))
+        return 0
+    else:
+        return 1
 
