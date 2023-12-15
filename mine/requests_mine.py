@@ -71,11 +71,11 @@ def send(msg):
         print('\n')
         if message['code'] < 0:
             email(text='说书人脚本异常终止: \n' + str(message['message']), subject='说书人脚本')
-            qqbot_send(msg='说书人脚本异常终止: \n' + str(message['message']))
+            # qqbot_send(msg='说书人脚本异常终止: \n' + str(message['message']))
             return 0
         elif message['message'] == '你被禁言啦':
             email(text='说书人脚本被禁言: ' + '脚本暂停一天', subject='说书人脚本')
-            qqbot_send(msg='说书人脚本被禁言: ' + '脚本暂停一天')
+            # qqbot_send(msg='说书人脚本被禁言: ' + '脚本暂停一天')
             time.sleep(36000)
             return 1
         else:
