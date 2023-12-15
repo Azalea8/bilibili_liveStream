@@ -16,7 +16,7 @@ chunks = [content[i:i + 20] for i in range(0, len(content), 20)]
 while 1:
     while 1:
         flag = isStart()
-        if flag == 0:
+        if flag == 1:
             email(text='检测到炫神开播，说书人脚本启动', subject='说书人脚本')
             qqbot_send('检测到炫神开播，说书人脚本启动')
             break
@@ -39,6 +39,8 @@ while 1:
             else:
                 print(f'{count}条弹幕在播检测通过，脚本继续')
         if flag_api == 0:
+            email(text=f'说书人异常脚本终止，共发送弹幕{count}条', subject='说书人脚本')
+            qqbot_send(f'说书人异常脚本终止，共发送弹幕{count}条')
             break
         time.sleep(5)
 

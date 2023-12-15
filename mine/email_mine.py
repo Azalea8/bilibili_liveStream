@@ -4,9 +4,10 @@ from email.mime.text import MIMEText
 with open('txt/password.txt', 'r', encoding='utf-8') as file:
     password = file.read()
 
+
 def email(text, subject, receivers=None, ):
     if receivers is None:
-        receivers = ['2574292235@qq.com']
+        receivers = ['liangwhm@s.upc.edu.cn']
 
     mail_host = 'smtp.qq.com'
     mail_user = '2574292235'
@@ -35,3 +36,7 @@ def email(text, subject, receivers=None, ):
         print(text + '  ||  邮件通知发送成功')
     except smtplib.SMTPException as e:
         print('error', e)
+
+
+if __name__ == '__main__':
+    email(text='说书人脚本被禁言: ' + '脚本暂停一天', subject='说书人脚本')

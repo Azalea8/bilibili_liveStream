@@ -1,5 +1,6 @@
 import requests
 import json
+import time
 
 from mine.email_mine import email
 
@@ -31,7 +32,6 @@ def qqbot_send(msg):
 
 
 def send(msg):
-    global response
     url = 'https://api.live.bilibili.com/msg/send'
 
     data = {
@@ -45,8 +45,8 @@ def send(msg):
         'fontsize': '25',
         'rnd': '1700921525',
         'roomid': '14709735',
-        'csrf': '44fa6c87946e48d376c290656c92d788',
-        'csrf_token': '44fa6c87946e48d376c290656c92d788',
+        'csrf': '836aa3a1c082a31c5617e0d67d720c9c',
+        'csrf_token': '836aa3a1c082a31c5617e0d67d720c9c',
     }
 
     headers = {
@@ -58,14 +58,28 @@ def send(msg):
 
     data['msg'] = msg
 
-    response = requests.post(url=url, data=data, headers=headers)
-    message = json.loads(response.text)
-    print(message)
-    print('\n')
-    if message['code'] < 0:
-        email(text='说书人脚本异常终止: \n' + str(message), subject='说书人脚本')
-        qqbot_send(msg='说书人脚本异常终止: \n' + str(message))
-        return 0
+    temp = 0
+
+    try:
+        response = requests.post(url=url, data=data, headers=headers)
+    except:
+        temp = 1
+
+    if temp == 0:
+        message = json.loads(response.text)
+        print(message)
+        print('\n')
+        if message['code'] < 0:
+            email(text='说书人脚本异常终止: \n' + str(message['message']), subject='说书人脚本')
+            qqbot_send(msg='说书人脚本异常终止: \n' + str(message['message']))
+            return 0
+        elif message['message'] == '你被禁言啦':
+            email(text='说书人脚本被禁言: ' + '脚本暂停一天', subject='说书人脚本')
+            qqbot_send(msg='说书人脚本被禁言: ' + '脚本暂停一天')
+            time.sleep(36000)
+            return 1
+        else:
+            return 1
     else:
         return 1
 
