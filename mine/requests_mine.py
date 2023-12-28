@@ -45,8 +45,8 @@ def send(msg):
         'fontsize': '25',
         'rnd': '1700921525',
         'roomid': '14709735',
-        'csrf': '836aa3a1c082a31c5617e0d67d720c9c',
-        'csrf_token': '836aa3a1c082a31c5617e0d67d720c9c',
+        'csrf': 'e00b81e3bbf3c8ea094d257c8bab29c8',
+        'csrf_token': 'e00b81e3bbf3c8ea094d257c8bab29c8',
     }
 
     headers = {
@@ -68,7 +68,6 @@ def send(msg):
     if temp == 0:
         message = json.loads(response.text)
         print(message)
-        print('\n')
         if message['code'] < 0:
             email(text='说书人脚本异常终止: \n' + str(message['message']), subject='说书人脚本')
             # qqbot_send(msg='说书人脚本异常终止: \n' + str(message['message']))
@@ -76,8 +75,7 @@ def send(msg):
         elif message['message'] == '你被禁言啦':
             email(text='说书人脚本被禁言: ' + '脚本暂停一天', subject='说书人脚本')
             # qqbot_send(msg='说书人脚本被禁言: ' + '脚本暂停一天')
-            time.sleep(36000)
-            return 1
+            return 2
         else:
             return 1
     else:
