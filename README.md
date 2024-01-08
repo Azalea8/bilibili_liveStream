@@ -56,5 +56,3 @@ B站直播间说书人脚本，脚本挂载后可实现开播，脚本自动执�
 ```cookie```是在```Headers```里最长的那个。注意：```cookie```保存了个人信息，不要随便泄露
 
 <img alt="img.png" height="" src="Github/img/img.png" />
-
-<img alt="img_1.png" height="" src="Github/img/img_1.png" />
