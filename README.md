@@ -47,6 +47,8 @@ B站直播间说书人脚本，脚本挂载后可实现开播，脚本自动执�
 
 ```txt/cookie.txt``` 是 B站用户信息，
 
+```txt/csrf.txt``` 是 csrf_token
+
 ```txt/password.txt``` 是邮箱 smtp服务的密码。
 
 #### 注意项目里并没有相关的txt文件夹

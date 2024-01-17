@@ -5,7 +5,6 @@ from mine.requests_mine import send, isStart
 
 with open('txt/book.txt', 'r', encoding='utf-8') as file:
     content = file.read()
-file.close()
 
 content = content.replace('\t', '')  # 去除制表符
 content = content.replace('\n', '')
@@ -38,20 +37,24 @@ for chunk in chunks:
         # 暂停一天
         flag = -1
         time.sleep(3600 * 24)
+    elif flag_api == 3:
+        time.sleep(600)
 
     count += 1
     if count % 100 == 0:
         flag = isStart()
         if flag == 0:
-            email(text=f'检测到炫神下播，说书人脚本终止，共发送弹幕{count}条', subject='说书人脚本')
-            # qqbot_send(f'检测到炫神下播，说书人脚本终止，共发送弹幕{count}条')
-            count = 0
+            email(text=f'检测到炫神下播，说书人脚本暂停，共发送弹幕{count}条', subject='说书人脚本')
+            # qqbot_send(f'检测到炫神下播，说书人脚本暂停，共发送弹幕{count}条')
             flag = -1
         else:
             print(f'{count}条弹幕在播检测通过，脚本继续')
 
     time.sleep(5)
 
-email(text=f'说书人脚本真正结束', subject='说书人脚本')
-# qqbot_send(f'说书人脚本真正结束')
+with open('txt/book.txt', 'w', encoding='utf-8') as file:
+    file.writelines(chunks[count: len(chunks)])
+
+email(text=f'说书人脚本终止，重新加载小说', subject='说书人脚本')
+# qqbot_send(f'说书人脚本终止，重新加载小说')
 

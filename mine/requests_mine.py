@@ -5,7 +5,10 @@ import time
 from mine.email_mine import email
 
 with open('txt/cookie.txt', 'r', encoding='utf-8') as file:
-    tmp = file.read()
+    cookie = file.read()
+
+with open('txt/csrf.txt', 'r', encoding='utf-8') as file:
+    csrf = file.read()
 
 # 直播间房间号，可以用短号，如该直播间短号为 84074
 room_id = 14709735
@@ -45,12 +48,12 @@ def send(msg):
         'fontsize': '25',
         'rnd': '1700921525',
         'roomid': '14709735',
-        'csrf': 'e00b81e3bbf3c8ea094d257c8bab29c8',
-        'csrf_token': 'e00b81e3bbf3c8ea094d257c8bab29c8',
+        'csrf': csrf,
+        'csrf_token': csrf,
     }
 
     headers = {
-        'cookie': tmp,
+        'cookie': cookie,
         # 'origin': 'https://live.bilibili.com',
         # 'referer': 'https://live.bilibili.com/84074?live_from=84002&spm_id_from=333.337.0.0',
         'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36 Edg/117.0.2045.55',
@@ -73,9 +76,13 @@ def send(msg):
             # qqbot_send(msg='说书人脚本异常终止: \n' + str(message['message']))
             return 0
         elif message['message'] == '你被禁言啦':
-            email(text='说书人脚本被禁言: ' + '脚本暂停一天', subject='说书人脚本')
-            # qqbot_send(msg='说书人脚本被禁言: ' + '脚本暂停一天')
+            email(text=f"说书人脚本异常: {message['message']}" + ',脚本暂停一天', subject='说书人脚本')
+            # qqbot_send(msg=f"说书人脚本异常: {message['message']}" + ',脚本暂停一天')
             return 2
+        elif message['message'] == '系统升级中':
+            email(text=f"说书人脚本异常: {message['message']}", subject='说书人脚本')
+            # qqbot_send(msg=f"说书人脚本异常: {message['message']}")
+            return 3
         else:
             return 1
     else:

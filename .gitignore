@@ -110,3 +110,4 @@ venv.bak/
 txt/cookie.txt
 txt/book.txt
 txt/password.txt
+txt/csrf.txt
