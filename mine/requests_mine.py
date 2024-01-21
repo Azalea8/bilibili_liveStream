@@ -71,7 +71,7 @@ def send(msg):
         message = json.loads(tmp)
     except:
         temp = 1
-        email(text=f'说书人脚本异常终止: \n{tmp}', subject='说书人脚本')
+        email(text=f'说书人脚本出现一次异常: \n{tmp}', subject='说书人脚本')
         # qqbot_send(msg=f"说书人脚本异常:\n{tmp}")
 
     if temp == 0:
