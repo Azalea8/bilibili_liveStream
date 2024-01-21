@@ -62,15 +62,19 @@ def send(msg):
     data['msg'] = msg
 
     temp = 0
+    tmp = None
 
     try:
         response = requests.post(url=url, data=data, headers=headers)
+        tmp = response.text
+        print(tmp)
+        message = json.loads(tmp)
     except:
         temp = 1
+        email(text=f'说书人脚本异常终止: \n{tmp}', subject='说书人脚本')
+        # qqbot_send(msg=f"说书人脚本异常:\n{tmp}")
 
     if temp == 0:
-        message = json.loads(response.text)
-        print(message)
         if message['code'] < 0:
             email(text='说书人脚本异常终止: \n' + str(message['message']), subject='说书人脚本')
             # qqbot_send(msg='说书人脚本异常终止: \n' + str(message['message']))
